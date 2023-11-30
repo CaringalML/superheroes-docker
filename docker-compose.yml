@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  angular:
+    build:
+      context: ./super-hero.ui
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+  dotnet-api:
+    build:
+      context: ./dotnet-three
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    restart: always
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+
+
+
+
+
+    
