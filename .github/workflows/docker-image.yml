@@ -1,0 +1,55 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  super_hero_ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Test Super Hero UI
+        run: |
+          cd super-hero.ui
+
+      - name: Docker Login and Push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/super-heroes.ui:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/super-heroes.ui:${{ github.sha }}
+
+  nginx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Test Nginx
+        run: |
+          cd nginx
+
+      - name: Docker Login and Push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nginx:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/nginx:${{ github.sha }}
+
+  dotnet_three:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Test Dotnet Three
+        run: |
+          cd dotnet-three
+
+      - name: Docker Login and Push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/dotnet-three:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/dotnet-three:${{ github.sha }}
