@@ -12,6 +12,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Print Directory Contents
+        run: |
+          ls -R
+
       - name: Build and Test Super Hero UI
         run: |
           cd super-hero.ui
@@ -28,6 +32,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Print Directory Contents
+        run: |
+          ls -R
+
       - name: Build and Test Nginx
         run: |
           cd nginx
@@ -43,6 +51,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Print Directory Contents
+        run: |
+          ls -R
 
       - name: Build and Test Dotnet Three
         run: |
